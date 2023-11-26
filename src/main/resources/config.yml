@@ -1,0 +1,22 @@
+prefix: "&#FF0055&lAxCalendar &7» "
+
+database:
+  # h2, sqlite, mysql, postgresql
+  # for single server setups we recommend h2 because it's way faster than sqlite
+  type: "h2"
+
+  # you only need to touch these when using mysql/postgresql
+  address: 127.0.0.1
+  port: 3306
+  database: admin
+  username: admin
+  password: 'admin'
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 10
+    maximum-lifetime: 1800000
+    keepalive-time: 0
+    connection-timeout: 5000
+
+# do not edit
+version: 1

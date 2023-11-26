@@ -1,0 +1,37 @@
+help:
+  - " "
+  - "&#FF0055&lAxCalendar &7» "
+  - " &7- &f/axcalendar reload &7| &#FF00FFReload plugin"
+  - " "
+
+error:
+  too-early: "&#FF3333You can't claim this day yet!"
+  too-late: "&#FF3333You have missed this day!"
+  already-claimed: "&#FF3333You have already claimed this day!"
+
+reload:
+  success: "&#33FF33Plugin successfully reloaded!"
+  failed: "&#FF3333Failed to reload the plugin! Something is wrong in the &f%file%&#FF3333 file, look in the console or use a yaml validator to fix the errors!"
+
+menu:
+  title: "&0&lᴀᴅᴠᴇɴᴛ ᴄᴀʟᴇɴᴅᴀʀ"
+  rows: 6
+  filler:
+    material: "BLACK_STAINED_GLASS_PANE"
+    name: ""
+  days:
+    day-1:
+      slot: 10
+      item:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF0055&lDAY 1"
+        lore:
+          - ""
+      actions: # note: the [CLAIM] action will prevent the rest from running if the player can't claim the present
+        - "[CLAIM] 1"
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% reward!"
+
+# do not edit
+version: 1
