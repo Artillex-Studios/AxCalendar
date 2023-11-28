@@ -20,6 +20,11 @@ max-accounts-per-ip: 3
 # 2 - short format, for example 20m
 timer-format: 1
 
+# auto update gui
+# in ticks
+# set to -1 to disable
+update-gui: 20
+
 database:
   # h2, sqlite, mysql, postgresql
   # for single server setups we recommend h2 because it's way faster than sqlite

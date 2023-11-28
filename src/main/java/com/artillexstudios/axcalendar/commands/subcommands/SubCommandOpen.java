@@ -93,6 +93,30 @@ public class SubCommandOpen {
             }
 
             Scheduler.get().run(scheduledTask -> menu.open(player));
+
+            if (CONFIG.getInt("update-gui", 20) == -1) return;
+            Scheduler.get().runTimer(task -> {
+                if (menu.getInventory().getViewers().isEmpty()) task.cancel();
+
+                for (String str : MESSAGES.getSection("menu.days").getRoutesAsStrings(false)) {
+                    int day = Integer.parseInt(str);
+                    boolean claimed = AxCalendar.getDatabase().isClaimed(player, day);
+                    int dayOfMonth = CalendarUtils.getDayOfMonth();
+                    String type;
+
+                    final HashMap<String, String> replacements = new HashMap<>();
+                    replacements.put("%day%", "" + day);
+                    replacements.put("%time%", TimeUtils.formatTime(CalendarUtils.getMilisUntilDay(day)));
+
+                    if (claimed) type = "claimed";
+                    else if (!CalendarUtils.isSameMonth() || dayOfMonth < day) type = "unclaimable";
+                    else type = "claimable";
+
+                    final Section section = MESSAGES.getSection("menu.days." + str + ".item-" + type);
+                    final GuiItem guiItem = new GuiItem(new ItemBuilder(section).setName(section.getString("name"), replacements).setLore(section.getStringList("lore"), replacements).get());
+                    menu.updateItem(MESSAGES.getInt("menu.days." + str + ".slot"), guiItem);
+                }
+            }, 0, CONFIG.getInt("update-gui", 20));
         });
 
     }
