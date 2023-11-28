@@ -1,5 +1,25 @@
 prefix: "&#FF0055&lAxCalendar &7» "
 
+# which month should the calendar be active in?
+# https://docs.oracle.com/javase/8/docs/api/java/time/Month.html
+month: "DECEMBER"
+
+# https://docs.oracle.com/middleware/1221/wcs/tag-ref/MISC/TimeZones.html
+# set to "" to use the server default
+# example: Europe/London
+timezone: ""
+
+# should players be able to claim their older presents
+allow-late-claiming: true
+
+# how many accounts from one ip can claim a day's present
+max-accounts-per-ip: 3
+
+# the format of the %time% placeholder
+# 1 - dd:HH:MM:SS, for example 04:01:25:35
+# 2 - short format, for example 20m
+timer-format: 1
+
 database:
   # h2, sqlite, mysql, postgresql
   # for single server setups we recommend h2 because it's way faster than sqlite

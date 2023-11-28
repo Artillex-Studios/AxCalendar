@@ -1,9 +1,9 @@
 package com.artillexstudios.axcalendar.database;
 
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public interface Database {
 
@@ -11,11 +11,13 @@ public interface Database {
 
     void setup();
 
-    void claim(@NotNull UUID uuid, int day);
+    void claim(@NotNull Player player, int day);
 
-    boolean isClaimed(@NotNull UUID uuid, int day);
+    boolean isClaimed(@NotNull Player player, int day);
 
-    ArrayList<Integer> claimedDays(@NotNull UUID uuid);
+    ArrayList<Integer> claimedDays(@NotNull Player player);
+
+    int countIps(@NotNull Player player, int day);
 
     void disable();
 }

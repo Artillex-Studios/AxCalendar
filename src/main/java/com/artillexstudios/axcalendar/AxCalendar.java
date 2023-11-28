@@ -8,7 +8,6 @@ import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.dumper.Du
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.general.GeneralSettings;
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.loader.LoaderSettings;
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.updater.UpdaterSettings;
-import com.artillexstudios.axapi.nms.NMSHandlers;
 import com.artillexstudios.axapi.utils.MessageUtils;
 import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.commands.Commands;
@@ -21,8 +20,6 @@ import com.artillexstudios.axcalendar.libraries.Libraries;
 import net.byteflux.libby.BukkitLibraryManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
 
 import java.io.File;
@@ -72,6 +69,8 @@ public final class AxCalendar extends AxPlugin {
 
         final BukkitCommandHandler handler = BukkitCommandHandler.create(this);
         handler.register(new Commands());
+
+        threadedQueue = new ThreadedQueue<>("AxCalendar-Datastore-thread");
 
         switch (CONFIG.getString("database.type").toLowerCase()) {
             case "sqlite" -> database = new SQLite();

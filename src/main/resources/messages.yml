@@ -1,17 +1,24 @@
 help:
   - " "
   - "&#FF0055&lAxCalendar &7» "
-  - " &7- &f/axcalendar reload &7| &#FF00FFReload plugin"
+  - " &7- &f/axcalendar reload &7| &#FF0055Reload plugin"
   - " "
 
 error:
-  too-early: "&#FF3333You can't claim this day yet!"
-  too-late: "&#FF3333You have missed this day!"
-  already-claimed: "&#FF3333You have already claimed this day!"
+  too-early: "&#FF3333You can't claim this present yet!"
+  too-late: "&#FF3333You have missed this present!"
+  already-claimed: "&#FF3333You have already claimed this present!"
+  too-many-ips: "&#FF3333Too many accounts on your IP have tried to claim this present!"
 
 reload:
   success: "&#33FF33Plugin successfully reloaded!"
   failed: "&#FF3333Failed to reload the plugin! Something is wrong in the &f%file%&#FF3333 file, look in the console or use a yaml validator to fix the errors!"
+
+time:
+  second: "s"
+  minute: "m"
+  hour: "h"
+  day: "d"
 
 menu:
   title: "&0&lᴀᴅᴠᴇɴᴛ ᴄᴀʟᴇɴᴅᴀʀ"
@@ -19,19 +26,810 @@ menu:
   filler:
     material: "BLACK_STAINED_GLASS_PANE"
     name: ""
-  days:
-    day-1:
-      slot: 10
+  other:
+    close:
+      slot: 49
       item:
-        material: PLAYER_HEAD
-        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
-        name: "&#FF0055&lDAY 1"
+        material: BARRIER
+        name: "&#FF0000&lCLOSE"
         lore:
           - ""
-      actions: # note: the [CLAIM] action will prevent the rest from running if the player can't claim the present
-        - "[CLAIM] 1"
+          - "&#FF0000ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴏsᴇ"
+      actions:
+        - "[CLOSE]"
+  days:
+    1:
+      slot: 1
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
         - "[CONSOLE] give %player% apple 1"
-        - "[MESSAGE] &#33FF33You have claimed the day %day% reward!"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    2:
+      slot: 2
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    3:
+      slot: 3
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    4:
+      slot: 4
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    5:
+      slot: 5
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    6:
+      slot: 6
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    7:
+      slot: 7
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    8:
+      slot: 10
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    9:
+      slot: 11
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    10:
+      slot: 12
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    11:
+      slot: 13
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    12:
+      slot: 14
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    13:
+      slot: 15
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    14:
+      slot: 16
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    15:
+      slot: 19
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    16:
+      slot: 20
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    17:
+      slot: 21
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    18:
+      slot: 22
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    19:
+      slot: 23
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    20:
+      slot: 24
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    21:
+      slot: 25
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    22:
+      slot: 30
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    23:
+      slot: 31
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDUzNjhmNTYzNWZmNmMzNDA3ZjBmMzU2YzViNmUwOTQ3YmNkNWUzODQ5MGM5YWE4YjhiNTgyYTRmMjFhZTNjYiJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
+    24:
+      slot: 32
+      item-claimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjhkYzNjODQ0OTFjNGZmMTAzZGU2ZWEwMTg4MGUyZDgzNDMyY2Q0ODc4Yjg0ZDZiNDMyNTNjYzUxZmQ5NzhlNyJ9fX0="
+        name: "&#00FF00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fClaim your present!"
+          - ""
+          - "&#00FF00ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʟᴀɪᴍ"
+      item-claimed:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjOGY4MmNjZjhkMmFjYjc5MDA4ZTE3ODM0MDAyZThkYzU2ZTczMmVhODljYzFkYjNiZGU0MjA2NjU4ZWY3ZCJ9fX0="
+        name: "&#00AA00&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fYou have already claimed this present!"
+          - ""
+          - "&#00AA00ᴀʟʀᴇᴀᴅʏ ᴄʟᴀɪᴍᴇᴅ"
+      item-unclaimable:
+        material: PLAYER_HEAD
+        texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjhkYzNjODQ0OTFjNGZmMTAzZGU2ZWEwMTg4MGUyZDgzNDMyY2Q0ODc4Yjg0ZDZiNDMyNTNjYzUxZmQ5NzhlNyJ9fX0="
+        name: "&#FF3333&lDAY %day%"
+        lore:
+          - ""
+          - " &7- &fThe present can be opened in: &#FF9999%time%&f!"
+          - ""
+          - "&#FF3333ᴄᴏᴍᴇ ʙᴀᴄᴋ ʟᴀᴛᴇʀ"
+      # the action will only run when the player can claim the present
+      actions:
+        - "[CONSOLE] give %player% apple 1"
+        - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
 
 # do not edit
 version: 1
