@@ -95,6 +95,7 @@ public class SubCommandOpen {
             Scheduler.get().run(scheduledTask -> menu.open(player));
 
             if (CONFIG.getInt("update-gui", 20) == -1) return;
+            // TODO: rework this whole part
             Scheduler.get().runTimer(task -> {
                 if (menu.getInventory().getViewers().isEmpty()) task.cancel();
 
@@ -115,6 +116,37 @@ public class SubCommandOpen {
                     final Section section = MESSAGES.getSection("menu.days." + str + ".item-" + type);
                     final GuiItem guiItem = new GuiItem(new ItemBuilder(section).setName(section.getString("name"), replacements).setLore(section.getStringList("lore"), replacements).get());
                     menu.updateItem(MESSAGES.getInt("menu.days." + str + ".slot"), guiItem);
+
+                    guiItem.setAction(event -> {
+
+                        if (CalendarUtils.isSameMonth() && dayOfMonth > day && !CONFIG.getBoolean("allow-late-claiming", true)) {
+                            MESSAGEUTILS.sendLang(player, "error.too-late");
+                            return;
+                        }
+
+                        if (!CalendarUtils.isSameMonth() || dayOfMonth < day) {
+                            MESSAGEUTILS.sendLang(player, "error.too-early");
+                            return;
+                        }
+
+                        if (AxCalendar.getDatabase().isClaimed(player, day)) {
+                            MESSAGEUTILS.sendLang(player, "error.already-claimed");
+                            return;
+                        }
+
+                        if (CONFIG.getInt("max-accounts-per-ip", 3) <= AxCalendar.getDatabase().countIps(player, day)) {
+                            MESSAGEUTILS.sendLang(player, "error.too-many-ips");
+                            return;
+                        }
+
+                        AxCalendar.getDatabase().claim(player, day);
+
+                        subCommand(player);
+
+                        for (String str2 : MESSAGES.getStringList("menu.days." + str + ".actions")) {
+                            ActionUtils.handleAction(event.getWhoClicked(), str2, day);
+                        }
+                    });
                 }
             }, 0, CONFIG.getInt("update-gui", 20));
         });
