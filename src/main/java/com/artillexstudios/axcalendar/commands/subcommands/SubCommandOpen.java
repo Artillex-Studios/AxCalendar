@@ -29,16 +29,19 @@ public class SubCommandOpen {
                 .disableAllInteractions()
                 .create();
 
-        menu.getFiller().fill(new GuiItem(new ItemBuilder(MESSAGES.getSection("menu.filler")).get()));
+        if (MESSAGES.getSection("menu.filler") != null)
+            menu.getFiller().fill(new GuiItem(new ItemBuilder(MESSAGES.getSection("menu.filler")).get()));
 
-        for (String str : MESSAGES.getSection("menu.other").getRoutesAsStrings(false)) {
-            final GuiItem guiItem = new GuiItem(new ItemBuilder(MESSAGES.getSection("menu.other." + str + ".item")).get());
-            guiItem.setAction(event -> {
-                for (String str2 : MESSAGES.getStringList("menu.other." + str + ".actions")) {
-                    ActionUtils.handleAction(event.getWhoClicked(), str2, -1);
-                }
-            });
-            menu.setItem(MESSAGES.getInt("menu.other." + str + ".slot"), guiItem);
+        if (MESSAGES.getSection("menu.other") != null) {
+            for (String str : MESSAGES.getSection("menu.other").getRoutesAsStrings(false)) {
+                final GuiItem guiItem = new GuiItem(new ItemBuilder(MESSAGES.getSection("menu.other." + str + ".item")).get());
+                guiItem.setAction(event -> {
+                    for (String str2 : MESSAGES.getStringList("menu.other." + str + ".actions")) {
+                        ActionUtils.handleAction(event.getWhoClicked(), str2, -1);
+                    }
+                });
+                menu.setItem(MESSAGES.getInt("menu.other." + str + ".slot"), guiItem);
+            }
         }
 
         AxCalendar.getThreadedQueue().submit(() -> {

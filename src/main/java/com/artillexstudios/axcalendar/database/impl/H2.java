@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.UUID;
 
 public class H2 implements Database {
     private Connection conn;
@@ -126,6 +127,22 @@ public class H2 implements Database {
         }
 
         return 0;
+    }
+
+    @Override
+    public void reset(@NotNull UUID uuid) {
+
+        final String sql = """
+                        DELETE FROM axcalendar_data WHERE uuid = ?;
+                """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, uuid.toString());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

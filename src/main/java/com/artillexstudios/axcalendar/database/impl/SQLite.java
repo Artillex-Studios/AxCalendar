@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class SQLite implements Database {
     private Connection conn;
@@ -124,6 +125,22 @@ public class SQLite implements Database {
         }
 
         return 0;
+    }
+
+    @Override
+    public void reset(@NotNull UUID uuid) {
+
+        final String sql = """
+                        DELETE FROM axcalendar_data WHERE uuid = ?;
+                """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, uuid.toString());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

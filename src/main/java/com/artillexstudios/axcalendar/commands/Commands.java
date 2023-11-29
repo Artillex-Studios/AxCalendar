@@ -3,6 +3,8 @@ package com.artillexstudios.axcalendar.commands;
 import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.commands.subcommands.SubCommandOpen;
 import com.artillexstudios.axcalendar.commands.subcommands.SubCommandReload;
+import com.artillexstudios.axcalendar.commands.subcommands.SubCommandReset;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -32,5 +34,11 @@ public class Commands {
     @CommandPermission("axcalendar.admin")
     public void reload(@NotNull CommandSender sender) {
         new SubCommandReload().subCommand(sender);
+    }
+
+    @Subcommand("reset")
+    @CommandPermission("axcalendar.admin")
+    public void reset(@NotNull CommandSender sender, OfflinePlayer player) {
+        new SubCommandReset().subCommand(sender, player);
     }
 }
