@@ -7,6 +7,7 @@ import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.AxCalendar;
 import com.artillexstudios.axcalendar.utils.ActionUtils;
 import com.artillexstudios.axcalendar.utils.CalendarUtils;
+import com.artillexstudios.axcalendar.utils.RequirementUtils;
 import com.artillexstudios.axcalendar.utils.TimeUtils;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
@@ -65,6 +66,11 @@ public class SubCommandOpen {
 
                 guiItem.setAction(event -> {
 
+                    if (!RequirementUtils.canClaim(player)) {
+                        MESSAGEUTILS.sendLang(player, "error.too-late");
+                        return;
+                    }
+
                     if (CalendarUtils.isSameMonth() && dayOfMonth > day && !CONFIG.getBoolean("allow-late-claiming", true)) {
                         MESSAGEUTILS.sendLang(player, "error.too-late");
                         return;
@@ -121,6 +127,11 @@ public class SubCommandOpen {
                     menu.updateItem(MESSAGES.getInt("menu.days." + str + ".slot"), guiItem);
 
                     guiItem.setAction(event -> {
+
+                        if (!RequirementUtils.canClaim(player)) {
+                            MESSAGEUTILS.sendLang(player, "error.requirements-fail");
+                            return;
+                        }
 
                         if (CalendarUtils.isSameMonth() && dayOfMonth > day && !CONFIG.getBoolean("allow-late-claiming", true)) {
                             MESSAGEUTILS.sendLang(player, "error.too-late");

@@ -25,6 +25,15 @@ timer-format: 1
 # set to -1 to disable
 update-gui: 20
 
+# should the player have these to claim presents?
+# list of options:
+# [PLAYTIME] - the playtime statistic of the player (in minutes)
+# [PERMISSION] - require a player to have a permission to claim presents
+# to enable remove the [] and add the one you need without the hashtag:
+#  - "[PLAYTIME] 30"
+#  - "[PERMISSION] some.permission.here"
+claim-requirements: []
+
 database:
   # h2, sqlite, mysql, postgresql
   # for single server setups we recommend h2 because it's way faster than sqlite
@@ -44,4 +53,4 @@ database:
     connection-timeout: 5000
 
 # do not edit
-version: 1
+version: 2

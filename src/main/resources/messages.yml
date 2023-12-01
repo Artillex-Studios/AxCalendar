@@ -9,6 +9,7 @@ error:
   too-late: "&#FF3333You have missed this present!"
   already-claimed: "&#FF3333You have already claimed this present!"
   too-many-ips: "&#FF3333Too many accounts on your IP have tried to claim this present!"
+  requirements-fail: "&#FF3333You can't claim this present!"
 
 reload:
   success: "&#33FF33Plugin successfully reloaded!"
@@ -836,4 +837,4 @@ menu:
         - "[MESSAGE] &#33FF33You have claimed the day %day% present!"
 
 # do not edit
-version: 1
+version: 2
