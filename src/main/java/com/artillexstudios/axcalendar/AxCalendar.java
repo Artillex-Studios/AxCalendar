@@ -26,10 +26,10 @@ import revxrsal.commands.bukkit.BukkitCommandHandler;
 import java.io.File;
 
 public final class AxCalendar extends AxPlugin {
-    private static AxPlugin instance;
     public static Config CONFIG;
     public static Config MESSAGES;
     public static MessageUtils MESSAGEUTILS;
+    private static AxPlugin instance;
     private static ThreadedQueue<Runnable> threadedQueue;
     private static Database database;
 
@@ -74,10 +74,21 @@ public final class AxCalendar extends AxPlugin {
         threadedQueue = new ThreadedQueue<>("AxCalendar-Datastore-thread");
 
         switch (CONFIG.getString("database.type").toLowerCase()) {
-            case "sqlite" -> database = new SQLite();
-            case "mysql" -> database = new MySQL();
-            case "postgresql" -> database = new PostgreSQL();
-            default -> database = new H2();
+            case "sqlite": {
+                database = new SQLite();
+                break;
+            }
+            case "mysql": {
+                database = new MySQL();
+                break;
+            }
+            case "postgresql": {
+                database = new PostgreSQL();
+                break;
+            }
+            default: {
+                database = new H2();
+            }
         }
 
         database.setup();

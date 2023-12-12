@@ -13,21 +13,25 @@ public class ActionUtils {
     public static void handleAction(@NotNull HumanEntity player, @NotNull String str, int day) {
         if (str.startsWith("[CLOSE]")) {
             player.closeInventory();
+            return;
         }
 
         if (str.startsWith("[CONSOLE]")) {
             str = str.replace("[CONSOLE] ", "");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), str.replace("%day%", "" + day).replace("%player%", player.getName()));
+            return;
         }
 
         if (str.startsWith("[MESSAGE]")) {
             str = str.replace("[MESSAGE] ", "");
             MESSAGEUTILS.sendFormatted(player, str.replace("%day%", "" + day).replace("%player%", player.getName()));
+            return;
         }
 
         if (str.startsWith("[PLAYER]")) {
             str = str.replace("[PLAYER] ", "");
             Bukkit.dispatchCommand(player, str.replace("%day%", "" + day).replace("%player%", player.getName()));
+            return;
         }
 
         if (str.startsWith("[SOUND]")) {

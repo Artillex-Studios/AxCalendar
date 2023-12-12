@@ -17,16 +17,18 @@ public class RequirementUtils {
             final String[] ar = str.split(" ");
 
             switch (ar[0]) {
-                case "[PLAYTIME]" -> {
+                case "[PLAYTIME]": {
                     if ((player.getStatistic(Statistic.PLAY_ONE_MINUTE) / 60 / 20) >= Integer.parseInt(ar[1])) {
                         canClaim = true;
                     }
+                    break;
                 }
 
-                case "[PERMISSION]" -> {
+                case "[PERMISSION]": {
                     if (player.hasPermission(ar[1])) {
                         canClaim = true;
                     }
+                    break;
                 }
             }
         }

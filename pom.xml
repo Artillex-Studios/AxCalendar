@@ -6,13 +6,13 @@
 
   <groupId>com.artillexstudios</groupId>
   <artifactId>AxCalendar</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
   <packaging>jar</packaging>
 
   <name>AxCalendar</name>
 
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -23,8 +23,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>15</source>
-          <target>15</target>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
       <plugin>
@@ -42,23 +42,23 @@
                 <relocations>
                     <relocation>
                         <pattern>com.artillexstudios.axapi</pattern>
-                        <shadedPattern>com.artillexstudios.axgraves.libs.axapi</shadedPattern>
+                        <shadedPattern>com.artillexstudios.axcalendar.libs.axapi</shadedPattern>
                     </relocation>
                     <relocation>
                         <pattern>org.bstats</pattern>
-                        <shadedPattern>com.artillexstudios.axgraves.libs.bstats</shadedPattern>
+                        <shadedPattern>com.artillexstudios.axcalendar.libs.bstats</shadedPattern>
                     </relocation>
                     <relocation>
                         <pattern>dev.triumphteam.gui</pattern>
-                        <shadedPattern>com.artillexstudios.axgraves.libs.gui</shadedPattern>
+                        <shadedPattern>com.artillexstudios.axcalendar.libs.gui</shadedPattern>
                     </relocation>
                     <relocation>
                         <pattern>net.kyori.adventure</pattern>
-                        <shadedPattern>com.artillexstudios.axgraves.libs.kyori</shadedPattern>
+                        <shadedPattern>com.artillexstudios.axcalendar.libs.kyori</shadedPattern>
                     </relocation>
                     <relocation>
                         <pattern>revxrsal.commands</pattern>
-                        <shadedPattern>com.artillexstudios.axgraves.libs.lamp</shadedPattern>
+                        <shadedPattern>com.artillexstudios.axcalendar.libs.lamp</shadedPattern>
                     </relocation>
                 </relocations>
             </configuration>
@@ -97,13 +97,13 @@
       <dependency>
           <groupId>org.spigotmc</groupId>
           <artifactId>spigot-api</artifactId>
-          <version>1.18.2-R0.1-SNAPSHOT</version>
+          <version>1.20.2-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
       <dependency>
           <groupId>com.artillexstudios.axapi</groupId>
           <artifactId>axapi</artifactId>
-          <version>1.3.7</version>
+          <version>1.4.8</version>
           <scope>compile</scope>
       </dependency>
       <dependency>

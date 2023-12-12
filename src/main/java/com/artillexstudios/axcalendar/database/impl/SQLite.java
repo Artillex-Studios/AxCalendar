@@ -31,13 +31,12 @@ public class SQLite implements Database {
             throw new RuntimeException(e);
         }
 
-        final String CREATE_TABLE = """
-                        CREATE TABLE IF NOT EXISTS axcalendar_data (
-                        	`uuid` VARCHAR(36) NOT NULL,
-                        	`day` INT(64) NOT NULL,
-                        	`ipv4` INT UNSIGNED NOT NULL
-                        );
-                """;
+        final String CREATE_TABLE =
+                    "CREATE TABLE IF NOT EXISTS axcalendar_data (" +
+                        "	`uuid` VARCHAR(36) NOT NULL," +
+                        "	`day` INT(64) NOT NULL," +
+                        "	`ipv4` INT UNSIGNED NOT NULL" +
+                    ");";
 
         try (PreparedStatement stmt = conn.prepareStatement(CREATE_TABLE)) {
             stmt.executeUpdate();
@@ -49,9 +48,7 @@ public class SQLite implements Database {
     @Override
     public void claim(@NotNull Player player, int day) {
 
-        final String sql = """
-                        INSERT INTO axcalendar_data (uuid, day, ipv4) VALUES (?, ?, ?);
-                """;
+        final String sql = "INSERT INTO axcalendar_data (uuid, day, ipv4) VALUES (?, ?, ?);";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, player.getUniqueId().toString());
@@ -67,9 +64,7 @@ public class SQLite implements Database {
     @Override
     public boolean isClaimed(@NotNull Player player, int day) {
 
-        final String sql = """
-                        SELECT * FROM axcalendar_data WHERE uuid = ? AND day = ? LIMIT 1
-                """;
+        final String sql = "SELECT * FROM axcalendar_data WHERE uuid = ? AND day = ? LIMIT 1";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, player.getUniqueId().toString());
@@ -89,9 +84,7 @@ public class SQLite implements Database {
     public ArrayList<Integer> claimedDays(@NotNull Player player) {
         final ArrayList<Integer> claimedDays = new ArrayList<>();
 
-        final String sql = """
-                        SELECT day FROM axcalendar_data WHERE uuid = ?;
-                """;
+        final String sql = "SELECT day FROM axcalendar_data WHERE uuid = ?;";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, player.getUniqueId().toString());
@@ -109,9 +102,7 @@ public class SQLite implements Database {
     @Override
     public int countIps(@NotNull Player player, int day) {
 
-        final String sql = """
-                        SELECT COUNT(*) FROM axcalendar_data WHERE ipv4 = ? AND day = ?;
-                """;
+        final String sql = "SELECT COUNT(*) FROM axcalendar_data WHERE ipv4 = ? AND day = ?;";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, IpUtils.ipToInt(player.getAddress().getAddress()));
@@ -130,9 +121,7 @@ public class SQLite implements Database {
     @Override
     public void reset(@NotNull UUID uuid) {
 
-        final String sql = """
-                        DELETE FROM axcalendar_data WHERE uuid = ?;
-                """;
+        final String sql = "DELETE FROM axcalendar_data WHERE uuid = ?;";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, uuid.toString());
