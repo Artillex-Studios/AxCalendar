@@ -2,7 +2,7 @@ package com.artillexstudios.axcalendar.commands.subcommands;
 
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.block.implementation.Section;
 import com.artillexstudios.axapi.scheduler.Scheduler;
-import com.artillexstudios.axcalendar.utils.ItemBuilder;
+import com.artillexstudios.axapi.utils.ItemBuilder;
 import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.AxCalendar;
 import com.artillexstudios.axcalendar.utils.ActionUtils;
@@ -86,7 +86,8 @@ public class SubCommandOpen {
                         return;
                     }
 
-                    if (CONFIG.getInt("max-accounts-per-ip", 3) <= AxCalendar.getDatabase().countIps(player, day)) {
+                    int maxIP = CONFIG.getInt("max-accounts-per-ip", 3);
+                    if (maxIP != -1 && maxIP <= AxCalendar.getDatabase().countIps(player, day)) {
                         MESSAGEUTILS.sendLang(player, "error.too-many-ips");
                         return;
                     }
@@ -148,7 +149,8 @@ public class SubCommandOpen {
                             return;
                         }
 
-                        if (CONFIG.getInt("max-accounts-per-ip", 3) <= AxCalendar.getDatabase().countIps(player, day)) {
+                        int maxIP = CONFIG.getInt("max-accounts-per-ip", 3);
+                        if (maxIP != -1 && maxIP <= AxCalendar.getDatabase().countIps(player, day)) {
                             MESSAGEUTILS.sendLang(player, "error.too-many-ips");
                             return;
                         }

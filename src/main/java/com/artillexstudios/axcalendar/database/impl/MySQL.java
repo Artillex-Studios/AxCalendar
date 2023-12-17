@@ -28,7 +28,7 @@ public class MySQL implements Database {
     @Override
     public void setup() {
 
-        hConfig.setPoolName("axboosters-pool");
+        hConfig.setPoolName("axcalendar-pool");
 
         hConfig.setMaximumPoolSize(CONFIG.getInt("database.pool.maximum-pool-size"));
         hConfig.setMinimumIdle(CONFIG.getInt("database.pool.minimum-idle"));

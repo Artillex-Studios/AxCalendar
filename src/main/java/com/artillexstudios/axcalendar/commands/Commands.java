@@ -4,6 +4,7 @@ import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.commands.subcommands.SubCommandOpen;
 import com.artillexstudios.axcalendar.commands.subcommands.SubCommandReload;
 import com.artillexstudios.axcalendar.commands.subcommands.SubCommandReset;
+import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -40,5 +41,12 @@ public class Commands {
     @CommandPermission("axcalendar.admin")
     public void reset(@NotNull CommandSender sender, OfflinePlayer player) {
         new SubCommandReset().subCommand(sender, player);
+    }
+
+    @Subcommand("debuginfo")
+    @CommandPermission("axcalendar.admin")
+    public void debuginfo(@NotNull CommandSender sender) {
+        sender.sendMessage(StringUtils.formatToString("&#FF0000Current miliseconds: &f" + CalendarUtils.getZonedDateTime().toInstant().toEpochMilli()));
+        sender.sendMessage(StringUtils.formatToString("&#FF0000Date: &f" + CalendarUtils.getZonedDateTime()));
     }
 }

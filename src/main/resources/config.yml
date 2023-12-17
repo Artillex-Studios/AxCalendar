@@ -9,10 +9,14 @@ month: "DECEMBER"
 # example: Europe/London
 timezone: ""
 
+# hours of offset, if everything is working after setting the timezone field, then don't touch this
+timezone-offset: 0
+
 # should players be able to claim their older presents
 allow-late-claiming: true
 
 # how many accounts from one ip can claim a day's present
+# set to -1 to disable
 max-accounts-per-ip: 3
 
 # the format of the %time% placeholder
@@ -53,4 +57,4 @@ database:
     connection-timeout: 5000
 
 # do not edit
-version: 2
+version: 3

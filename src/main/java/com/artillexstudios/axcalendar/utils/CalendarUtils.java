@@ -1,14 +1,19 @@
 package com.artillexstudios.axcalendar.utils;
 
-import java.time.Month;
-import java.util.Calendar;
+import org.jetbrains.annotations.NotNull;
+
+import java.time.Clock;
+import java.time.Duration;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.TextStyle;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import static com.artillexstudios.axcalendar.AxCalendar.CONFIG;
 
 public class CalendarUtils {
-    private static Calendar calendar;
+    private static ZoneId zoneId;
+    private static int offset;
 
     static {
         reload();
@@ -16,28 +21,32 @@ public class CalendarUtils {
 
     public static void reload() {
         if (!CONFIG.getString("timezone", "").isEmpty()) {
-            calendar = Calendar.getInstance(TimeZone.getTimeZone(CONFIG.getString("timezone", "")));
+            zoneId = ZoneId.of(CONFIG.getString("timezone", ""));
+            offset = CONFIG.getInt("timezone-offset", 0);
         } else {
-            calendar = Calendar.getInstance();
+            zoneId = ZoneId.systemDefault();
+            offset = CONFIG.getInt("timezone-offset", 0);
         }
     }
 
     public static int getDayOfMonth() {
-        return calendar.get(Calendar.DAY_OF_MONTH);
+        return getZonedDateTime().getDayOfMonth();
+    }
+
+    @NotNull
+    public static ZonedDateTime getZonedDateTime() {
+        ZonedDateTime zdt = ZonedDateTime.now(Clock.system(zoneId));
+        zdt = zdt.plusHours(offset);
+        return zdt;
     }
 
     public static boolean isSameMonth() {
-        return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US).equalsIgnoreCase(CONFIG.getString("month", "DECEMBER"));
+        return getZonedDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.US).equalsIgnoreCase(CONFIG.getString("month", "DECEMBER"));
     }
 
     public static long getMilisUntilDay(int day) {
-        final Calendar calendar1 = (Calendar) calendar.clone();
-        calendar1.set(Calendar.MONTH, Month.valueOf(CONFIG.getString("month", "DECEMBER")).ordinal());
-        calendar1.set(Calendar.DAY_OF_MONTH, day);
-        calendar1.set(Calendar.HOUR_OF_DAY, 0);
-        calendar1.set(Calendar.MINUTE, 0);
-        calendar1.set(Calendar.SECOND, 0);
-        calendar1.set(Calendar.MILLISECOND, 0);
-        return calendar1.getTimeInMillis() - System.currentTimeMillis();
+        final ZonedDateTime startOfTomorrow = getZonedDateTime().withDayOfMonth(day).toLocalDate().atStartOfDay(zoneId);
+        final Duration duration = Duration.between(getZonedDateTime(), startOfTomorrow);
+        return duration.toMillis();
     }
 }
