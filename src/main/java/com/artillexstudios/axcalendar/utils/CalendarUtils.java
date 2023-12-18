@@ -22,11 +22,10 @@ public class CalendarUtils {
     public static void reload() {
         if (!CONFIG.getString("timezone", "").isEmpty()) {
             zoneId = ZoneId.of(CONFIG.getString("timezone", ""));
-            offset = CONFIG.getInt("timezone-offset", 0);
         } else {
             zoneId = ZoneId.systemDefault();
-            offset = CONFIG.getInt("timezone-offset", 0);
         }
+        offset = CONFIG.getInt("timezone-offset", 0);
     }
 
     public static int getDayOfMonth() {
