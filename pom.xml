@@ -6,7 +6,7 @@
 
   <groupId>com.artillexstudios</groupId>
   <artifactId>AxCalendar</artifactId>
-  <version>1.4.2</version>
+  <version>1.5.0</version>
   <packaging>jar</packaging>
 
   <name>AxCalendar</name>
@@ -91,6 +91,10 @@
           <id>jitpack.io</id>
           <url>https://jitpack.io</url>
       </repository>
+      <repository>
+          <id>placeholderapi</id>
+          <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+      </repository>
   </repositories>
 
   <dependencies>
@@ -103,7 +107,7 @@
       <dependency>
           <groupId>com.artillexstudios.axapi</groupId>
           <artifactId>axapi</artifactId>
-          <version>1.4.23</version>
+          <version>1.4.96</version>
           <scope>compile</scope>
       </dependency>
       <dependency>
@@ -169,6 +173,12 @@
           <groupId>com.h2database</groupId>
           <artifactId>h2</artifactId>
           <version>2.1.214</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>me.clip</groupId>
+          <artifactId>placeholderapi</artifactId>
+          <version>2.11.3</version>
           <scope>provided</scope>
       </dependency>
   </dependencies>

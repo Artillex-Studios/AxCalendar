@@ -9,6 +9,7 @@ import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.dumper.Du
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.general.GeneralSettings;
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.loader.LoaderSettings;
 import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.updater.UpdaterSettings;
+import com.artillexstudios.axapi.utils.FeatureFlags;
 import com.artillexstudios.axapi.utils.MessageUtils;
 import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.commands.Commands;
@@ -17,6 +18,7 @@ import com.artillexstudios.axcalendar.database.impl.H2;
 import com.artillexstudios.axcalendar.database.impl.MySQL;
 import com.artillexstudios.axcalendar.database.impl.PostgreSQL;
 import com.artillexstudios.axcalendar.database.impl.SQLite;
+import com.artillexstudios.axcalendar.gui.GuiUpdater;
 import com.artillexstudios.axcalendar.libraries.Libraries;
 import net.byteflux.libby.BukkitLibraryManager;
 import org.bstats.bukkit.Metrics;
@@ -93,10 +95,16 @@ public final class AxCalendar extends AxPlugin {
 
         database.setup();
 
+        new GuiUpdater().start();
+
         Bukkit.getConsoleSender().sendMessage(StringUtils.formatToString("&#FF0055[AxCalendar] Loaded plugin! Using &f" + database.getType() + " &#FF0055database to store data!"));
     }
 
     public void disable() {
         database.disable();
+    }
+
+    public void updateFlags() {
+        FeatureFlags.PACKET_ENTITY_TRACKER_ENABLED.set(false);
     }
 }
