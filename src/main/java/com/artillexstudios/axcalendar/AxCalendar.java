@@ -105,6 +105,7 @@ public final class AxCalendar extends AxPlugin {
     }
 
     public void updateFlags() {
-        FeatureFlags.PACKET_ENTITY_TRACKER_ENABLED.set(false);
+        FeatureFlags.PACKET_ENTITY_TRACKER_ENABLED.set(true);
+        FeatureFlags.HOLOGRAM_UPDATE_TICKS.set(20L);
     }
 }
