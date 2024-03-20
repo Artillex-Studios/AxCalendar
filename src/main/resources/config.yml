@@ -38,6 +38,14 @@ update-gui: 20
 #  - "[PERMISSION] some.permission.here"
 claim-requirements: []
 
+# you must define at least 1
+# reloading will add new commands, however a restart is recommended when editing this
+command-aliases:
+  - "axcalendar"
+  - "calendar"
+  - "adventcalendar"
+  - "axadventcalendar"
+
 database:
   # h2, sqlite, mysql, postgresql
   # for single server setups we recommend h2 because it's way faster than sqlite
@@ -57,4 +65,4 @@ database:
     connection-timeout: 5000
 
 # do not edit
-version: 3
+version: 4

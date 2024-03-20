@@ -1,5 +1,6 @@
 package com.artillexstudios.axcalendar.commands.subcommands;
 
+import com.artillexstudios.axcalendar.commands.Commands;
 import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -28,5 +29,6 @@ public class SubCommandReload {
 
         CalendarUtils.reload();
         MESSAGEUTILS.sendLang(sender, "reload.success");
+        Commands.registerCommand();
     }
 }

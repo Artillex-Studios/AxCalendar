@@ -70,8 +70,7 @@ public final class AxCalendar extends AxPlugin {
 
         MESSAGEUTILS = new MessageUtils(MESSAGES.getBackingDocument(), "prefix", CONFIG.getBackingDocument());
 
-        final BukkitCommandHandler handler = BukkitCommandHandler.create(this);
-        handler.register(new Commands());
+        Commands.registerCommand();
 
         threadedQueue = new ThreadedQueue<>("AxCalendar-Datastore-thread");
 
