@@ -20,10 +20,9 @@ import com.artillexstudios.axcalendar.database.impl.PostgreSQL;
 import com.artillexstudios.axcalendar.database.impl.SQLite;
 import com.artillexstudios.axcalendar.gui.GuiUpdater;
 import com.artillexstudios.axcalendar.libraries.Libraries;
-import net.byteflux.libby.BukkitLibraryManager;
+import com.artillexstudios.axapi.libs.libby.BukkitLibraryManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import revxrsal.commands.bukkit.BukkitCommandHandler;
 
 import java.io.File;
 
@@ -48,7 +47,7 @@ public final class AxCalendar extends AxPlugin {
     }
 
     public void load() {
-        BukkitLibraryManager libraryManager = new BukkitLibraryManager(this, "libraries");
+        BukkitLibraryManager libraryManager = new BukkitLibraryManager(this, "lib");
         libraryManager.addMavenCentral();
         libraryManager.addJitPack();
         libraryManager.addRepository("https://repo.codemc.org/repository/maven-public/");

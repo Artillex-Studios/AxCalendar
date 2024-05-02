@@ -2,3 +2,7 @@ name: AxCalendar
 version: '${project.version}'
 main: com.artillexstudios.axcalendar.AxCalendar
 api-version: '1.13'
+folia-supported: true
+
+softdepend:
+  - PlaceholderAPI

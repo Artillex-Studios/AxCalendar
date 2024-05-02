@@ -2,7 +2,8 @@ prefix: "&#FF0055&lAxCalendar &7» "
 
 # which month should the calendar be active in?
 # https://docs.oracle.com/javase/8/docs/api/java/time/Month.html
-month: "DECEMBER"
+# set to AUTO to use the current month
+month: "AUTO"
 
 # https://docs.oracle.com/middleware/1221/wcs/tag-ref/MISC/TimeZones.html
 # set to "" to use the server default

@@ -1,15 +1,12 @@
 package com.artillexstudios.axcalendar.commands.subcommands;
 
 import com.artillexstudios.axcalendar.AxCalendar;
-import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static com.artillexstudios.axcalendar.AxCalendar.CONFIG;
-import static com.artillexstudios.axcalendar.AxCalendar.MESSAGES;
 import static com.artillexstudios.axcalendar.AxCalendar.MESSAGEUTILS;
 
 public class SubCommandReset {

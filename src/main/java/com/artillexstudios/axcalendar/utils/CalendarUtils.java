@@ -40,7 +40,8 @@ public class CalendarUtils {
     }
 
     public static boolean isSameMonth() {
-        return getZonedDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.US).equalsIgnoreCase(CONFIG.getString("month", "DECEMBER"));
+        final String month = CONFIG.getString("month", "DECEMBER");
+        return month.equalsIgnoreCase("AUTO") || getZonedDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.US).equalsIgnoreCase(month);
     }
 
     public static long getMilisUntilDay(int day) {

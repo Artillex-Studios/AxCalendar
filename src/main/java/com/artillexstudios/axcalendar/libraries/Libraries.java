@@ -1,13 +1,9 @@
 package com.artillexstudios.axcalendar.libraries;
 
-import net.byteflux.libby.Library;
-import net.byteflux.libby.relocation.Relocation;
+import com.artillexstudios.axapi.libs.libby.Library;
+import com.artillexstudios.axapi.libs.libby.relocation.Relocation;
 
 public enum Libraries {
-
-    HIKARICP("com{}zaxxer:HikariCP:5.0.1",
-        Relocation.builder().pattern("com{}zaxxer").relocatedPattern("com{}artillexstudios{}axgens{}libs{}hikaricp").build()
-    ),
 
     MYSQL_CONNECTOR("com{}mysql:mysql-connector-j:8.0.33"),
 

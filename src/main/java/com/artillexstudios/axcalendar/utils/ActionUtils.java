@@ -1,5 +1,6 @@
 package com.artillexstudios.axcalendar.utils;
 
+import com.artillexstudios.axapi.scheduler.Scheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.HumanEntity;
@@ -18,7 +19,8 @@ public class ActionUtils {
 
         if (str.startsWith("[CONSOLE]")) {
             str = str.replace("[CONSOLE] ", "");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), str.replace("%day%", "" + day).replace("%player%", player.getName()));
+            final String msg = str.replace("%day%", "" + day).replace("%player%", player.getName());
+            Scheduler.get().executeAt(player.getLocation(), () -> Bukkit.dispatchCommand(player, msg));
             return;
         }
 
@@ -30,7 +32,8 @@ public class ActionUtils {
 
         if (str.startsWith("[PLAYER]")) {
             str = str.replace("[PLAYER] ", "");
-            Bukkit.dispatchCommand(player, str.replace("%day%", "" + day).replace("%player%", player.getName()));
+            final String msg = str.replace("%day%", "" + day).replace("%player%", player.getName());
+            Scheduler.get().executeAt(player.getLocation(), () -> Bukkit.dispatchCommand(player, msg));
             return;
         }
 
