@@ -20,7 +20,7 @@ public class ActionUtils {
         if (str.startsWith("[CONSOLE]")) {
             str = str.replace("[CONSOLE] ", "");
             final String msg = str.replace("%day%", "" + day).replace("%player%", player.getName());
-            Scheduler.get().executeAt(player.getLocation(), () -> Bukkit.dispatchCommand(player, msg));
+            Scheduler.get().executeAt(player.getLocation(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), msg));
             return;
         }
 

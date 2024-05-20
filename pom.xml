@@ -6,7 +6,7 @@
 
   <groupId>com.artillexstudios</groupId>
   <artifactId>AxCalendar</artifactId>
-  <version>1.7.0</version>
+  <version>1.7.1</version>
   <packaging>jar</packaging>
 
   <name>AxCalendar</name>
@@ -111,7 +111,7 @@
       <dependency>
           <groupId>com.artillexstudios.axapi</groupId>
           <artifactId>axapi</artifactId>
-          <version>1.4.186</version>
+          <version>1.4.234</version>
           <scope>compile</scope>
           <classifier>all</classifier>
       </dependency>
@@ -136,19 +136,19 @@
       <dependency>
           <groupId>net.kyori</groupId>
           <artifactId>adventure-text-minimessage</artifactId>
-          <version>4.16.0</version>
+          <version>4.17.0</version>
           <scope>compile</scope>
       </dependency>
       <dependency>
           <groupId>net.kyori</groupId>
           <artifactId>adventure-text-serializer-legacy</artifactId>
-          <version>4.16.0</version>
+          <version>4.17.0</version>
           <scope>compile</scope>
       </dependency>
       <dependency>
           <groupId>net.kyori</groupId>
           <artifactId>adventure-api</artifactId>
-          <version>4.16.0</version>
+          <version>4.17.0</version>
           <scope>compile</scope>
       </dependency>
       <dependency>
