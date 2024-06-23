@@ -20,6 +20,7 @@ import com.artillexstudios.axcalendar.database.impl.PostgreSQL;
 import com.artillexstudios.axcalendar.database.impl.SQLite;
 import com.artillexstudios.axcalendar.gui.GuiUpdater;
 import com.artillexstudios.axcalendar.libraries.Libraries;
+import com.artillexstudios.axcalendar.utils.UpdateNotifier;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 
@@ -95,6 +96,8 @@ public final class AxCalendar extends AxPlugin {
         new GuiUpdater().start();
 
         Bukkit.getConsoleSender().sendMessage(StringUtils.formatToString("&#FF0055[AxCalendar] Loaded plugin! Using &f" + database.getType() + " &#FF0055database to store data!"));
+
+        if (CONFIG.getBoolean("update-notifier.enabled", true)) new UpdateNotifier(this, 5135);
     }
 
     public void disable() {

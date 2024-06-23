@@ -1,5 +1,23 @@
 prefix: "&#FF0055&lAxCalendar &7» "
 
+database:
+  # h2, sqlite, mysql, postgresql
+  # for single server setups we recommend h2 because it's way faster than sqlite
+  type: "h2"
+
+  # you only need to touch these when using mysql/postgresql
+  address: 127.0.0.1
+  port: 3306
+  database: admin
+  username: admin
+  password: 'admin'
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 10
+    maximum-lifetime: 1800000
+    keepalive-time: 0
+    connection-timeout: 5000
+
 # which month should the calendar be active in?
 # https://docs.oracle.com/javase/8/docs/api/java/time/Month.html
 # set to AUTO to use the current month
@@ -47,23 +65,12 @@ command-aliases:
   - "adventcalendar"
   - "axadventcalendar"
 
-database:
-  # h2, sqlite, mysql, postgresql
-  # for single server setups we recommend h2 because it's way faster than sqlite
-  type: "h2"
-
-  # you only need to touch these when using mysql/postgresql
-  address: 127.0.0.1
-  port: 3306
-  database: admin
-  username: admin
-  password: 'admin'
-  pool:
-    maximum-pool-size: 10
-    minimum-idle: 10
-    maximum-lifetime: 1800000
-    keepalive-time: 0
-    connection-timeout: 5000
+# should be plugin notify you if there is a new update?
+update-notifier:
+  # if enabled, it will display the message in the console
+  enabled: true
+  # if enabled, it will broadcast the update message to all players who have the <plugin-name>.update-notify permission
+  on-join: true
 
 # do not edit
-version: 4
+version: 5
