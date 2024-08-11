@@ -35,7 +35,7 @@ commands:
   invalid-player: "&#FF0000The player &#BB0000%player% &#FF0000can not be found!"
   invalid-selector: "&#FF0000You can not use this selector in this command!"
 
-update-notifier: "&#FF88AAThere is a new version of the plugin available! &#DDDDDD(&#FFFFFFcurrent: &#FF0000%current% &#DDDDDD| &#FFFFFFlatest: &#00FF00%latest%&#DDDDDD)"
+update-notifier: "&#FF88AAThere is a new version of AxCalendar available! &#DDDDDD(&#FFFFFFcurrent: &#FF0000%current% &#DDDDDD| &#FFFFFFlatest: &#00FF00%latest%&#DDDDDD)"
 
 menu:
   title: "&0&lᴀᴅᴠᴇɴᴛ ᴄᴀʟᴇɴᴅᴀʀ"

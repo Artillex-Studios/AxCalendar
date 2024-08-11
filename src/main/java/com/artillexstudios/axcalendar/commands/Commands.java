@@ -68,11 +68,7 @@ public class Commands implements OrphanCommand {
 
     public static void registerCommand() {
         if (handler == null) {
-            Warning.WarningState prevState = Bukkit.getWarningState();
-            FastFieldAccessor accessor = FastFieldAccessor.forClassField(Bukkit.getServer().getClass().getPackage().getName() + ".CraftServer", "warningState");
-            accessor.set(Bukkit.getServer(), Warning.WarningState.OFF);
             handler = BukkitCommandHandler.create(AxCalendar.getInstance());
-            accessor.set(Bukkit.getServer(), prevState);
 
             handler.registerValueResolver(0, OfflinePlayer.class, context -> {
                 String value = context.pop();
