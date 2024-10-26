@@ -1,0 +1,32 @@
+# DOCUMENTATION: https://docs.artillex-studios.com/axcalendar.html
+# ITEM BUILDER: https://docs.artillex-studios.com/item-builder.html
+
+# you can create any amount of rewards here, make sure to set the day
+# only 1 reward should be connected to a single day (in a single reward, you can give multiple items/run commands)
+
+reward-example:
+  # days when this rewards will be given
+  days:
+    - "1-23"
+  # you can add item rewards
+  items:
+    - material: APPLE
+      name: "&#AA00FFJust a regular apple"
+      amount: 1
+  # you can add command rewards
+  commands:
+    - "say %player% got an apple from the calendar!"
+  # this will be sent when the player claims a reward
+  message: "&#33FF33You have claimed the day %day% present!"
+
+reward-example2:
+  days:
+    - "24"
+  items:
+    - material: FIREWORK_ROCKET
+      name: "&#AA00FFAxCalendar Rocket"
+      glow: true
+      amount: 1
+  commands:
+    - "say %player% got a firework rocket from the calendar!"
+  message: "&#33FF33You have claimed the day %day% present!"

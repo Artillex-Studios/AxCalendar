@@ -1,8 +1,9 @@
+# DOCUMENTATION: https://docs.artillex-studios.com/axcalendar.html
+
 prefix: "&#FF0055&lAxCalendar &7» "
 
 database:
-  # h2, sqlite, mysql, postgresql
-  # for single server setups we recommend h2 because it's way faster than sqlite
+  # h2, mysql, postgresql
   type: "h2"
 
   # you only need to touch these when using mysql/postgresql
@@ -65,6 +66,12 @@ command-aliases:
   - "adventcalendar"
   - "axadventcalendar"
 
+# list of sounds: https://www.digminecraft.com/lists/sound_list_pc.php
+# format: <sound>|<volume>|<pitch>
+sounds:
+  claimed: "entity.player.levelup|1|1"
+  failed: "block.anvil.destroy|1|1"
+
 # should be plugin notify you if there is a new update?
 update-notifier:
   # if enabled, it will display the message in the console
@@ -73,4 +80,4 @@ update-notifier:
   on-join: true
 
 # do not edit
-version: 5
+version: 6

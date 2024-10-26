@@ -5,16 +5,14 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Duration;
 
 import static com.artillexstudios.axcalendar.AxCalendar.CONFIG;
-import static com.artillexstudios.axcalendar.AxCalendar.MESSAGES;
+import static com.artillexstudios.axcalendar.AxCalendar.LANG;
 
 public class TimeUtils {
 
-    @NotNull
-    public static String formatTime(long time) {
-
+    public static @NotNull String fancyTime(long time) {
         if (time < 0) return "---";
 
-        Duration remainingTime = Duration.ofMillis(time);
+        final Duration remainingTime = Duration.ofMillis(time);
         long total = remainingTime.getSeconds();
         long days = total / 86400;
         long hours = (total % 86400) / 3600;
@@ -22,14 +20,25 @@ public class TimeUtils {
         long seconds = total % 60;
 
         if (CONFIG.getInt("timer-format", 1) == 1) {
-            if (days > 0) return String.format("%02d:%02d:%02d:%02d", days, hours, minutes, seconds);
-            if (hours > 0) return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+            if (days > 0)
+                return String.format("%02d:%02d:%02d:%02d", days, hours, minutes, seconds);
+            if (hours > 0)
+                return String.format("%02d:%02d:%02d", hours, minutes, seconds);
             return String.format("%02d:%02d", minutes, seconds);
+        } else if (CONFIG.getInt("timer-format", 1) == 2) {
+            if (days > 0)
+                return days + LANG.getString("time.day", "d");
+            if (hours > 0)
+                return hours + LANG.getString("time.hour", "h");
+            if (minutes > 0)
+                return minutes + LANG.getString("time.minute", "m");
+            return seconds + LANG.getString("time.second", "s");
         } else {
-            if (days > 0) return days + MESSAGES.getString("time.day", "d");
-            if (hours > 0) return hours + MESSAGES.getString("time.hour", "h");
-            if (minutes > 0) return minutes + MESSAGES.getString("time.minute", "m");
-            return seconds + MESSAGES.getString("time.second", "s");
+            if (days > 0)
+                return String.format("%02d" + LANG.getString("time.day", "d") + " %02d" + LANG.getString("time.hour", "h") +" %02d" + LANG.getString("time.minute", "m") + " %02d" + LANG.getString("time.second", "s"), days, hours, minutes, seconds);
+            if (hours > 0)
+                return String.format("%02d" + LANG.getString("time.hour", "h") +" %02d" + LANG.getString("time.minute", "m") + " %02d" + LANG.getString("time.second", "s"), hours, minutes, seconds);
+            return String.format("%02d" + LANG.getString("time.minute", "m") + " %02d" + LANG.getString("time.second", "s"), minutes, seconds);
         }
     }
 }

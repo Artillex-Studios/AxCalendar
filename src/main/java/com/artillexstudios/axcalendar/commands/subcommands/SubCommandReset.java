@@ -9,16 +9,16 @@ import java.util.Map;
 
 import static com.artillexstudios.axcalendar.AxCalendar.MESSAGEUTILS;
 
-public class SubCommandReset {
+public enum SubCommandReset {
+    INSTANCE;
 
-    public void subCommand(@NotNull CommandSender sender, OfflinePlayer player) {
-
+    public void execute(@NotNull CommandSender sender, OfflinePlayer player) {
         if (player.getName() == null) {
             MESSAGEUTILS.sendLang(sender, "reset.failed", Map.of("%player%", player.getName()));
             return;
         }
 
-        AxCalendar.getThreadedQueue().submit(() -> AxCalendar.getDatabase().reset(player.getUniqueId()));
+        AxCalendar.getThreadedQueue().submit(() -> AxCalendar.getDatabase().reset(player));
         MESSAGEUTILS.sendLang(sender, "reset.success", Map.of("%player%", player.getName()));
     }
 }

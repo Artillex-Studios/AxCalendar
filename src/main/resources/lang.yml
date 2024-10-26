@@ -1,0 +1,43 @@
+# DOCUMENTATION: https://docs.artillex-studios.com/axcalendar.html
+
+help:
+  - " "
+  - "&#FF0055&lAxCalendar &7» "
+  - " &7- &f/axcalendar reload &7| &#FF0055Reload plugin"
+  - " "
+
+error:
+  too-early: "&#FF3333You can't claim this present yet!"
+  too-late: "&#FF3333You have missed this present!"
+  already-claimed: "&#FF3333You have already claimed this present!"
+  too-many-ips: "&#FF3333Too many accounts on your IP have tried to claim this present!"
+  requirements-fail: "&#FF3333You can't claim this present!"
+
+reload:
+  success: "&#33FF33Plugin successfully reloaded!"
+  failed: "&#FF3333Failed to reload the plugin! Something is wrong in the &f%file%&#FF3333 file, look in the console or use a yaml validator to fix the errors!"
+
+reset:
+  success: "&#33FF33You have reset the calendar of %player%&#33FF33!"
+  failed: "&#FF3333Can't find player &f%player%&#FF3333!"
+
+time:
+  second: "s"
+  minute: "m"
+  hour: "h"
+  day: "d"
+
+commands:
+  invalid-value: "&#FF0000Invalid parameter: &#BB0000%value%"
+  invalid-command: "&#FF0000Invalid command or subcommand!"
+  missing-argument: "&#FF0000Missing argument! You must specify a value for &#BB0000%value%&#FF0000."
+  no-permission: "&#FF0000You don't have permission to access this command!"
+  out-of-range: "&#FF0000The &#BB0000%number% &#FF0000must be between &#BB0000%min% &#FF0000and &#BB0000%max%&#FF0000!"
+  player-only: "&#FF0000You must be a player to use this command!"
+  invalid-player: "&#FF0000The player &#BB0000%player% &#FF0000can not be found!"
+  invalid-selector: "&#FF0000You can not use this selector in this command!"
+
+update-notifier: "&#FF88AAThere is a new version of AxCalendar available! &#DDDDDD(&#FFFFFFcurrent: &#FF0000%current% &#DDDDDD| &#FFFFFFlatest: &#00FF00%latest%&#DDDDDD)"
+
+# do not edit
+version: 3

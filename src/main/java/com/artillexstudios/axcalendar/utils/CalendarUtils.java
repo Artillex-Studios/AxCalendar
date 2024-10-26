@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.Clock;
 import java.time.Duration;
+import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.TextStyle;
@@ -14,10 +15,6 @@ import static com.artillexstudios.axcalendar.AxCalendar.CONFIG;
 public class CalendarUtils {
     private static ZoneId zoneId;
     private static int offset;
-
-    static {
-        reload();
-    }
 
     public static void reload() {
         if (!CONFIG.getString("timezone", "").isEmpty()) {
@@ -45,7 +42,9 @@ public class CalendarUtils {
     }
 
     public static long getMilisUntilDay(int day) {
-        final ZonedDateTime startOfTomorrow = getZonedDateTime().withDayOfMonth(day).toLocalDate().atStartOfDay(zoneId);
+        final String monthStr = CONFIG.getString("month", "DECEMBER");
+        Month month = monthStr.equalsIgnoreCase("AUTO") ? getZonedDateTime().getMonth() : Month.valueOf(monthStr);
+        final ZonedDateTime startOfTomorrow = getZonedDateTime().withMonth(month.getValue()).withDayOfMonth(day).toLocalDate().atStartOfDay(zoneId);
         final Duration duration = Duration.between(getZonedDateTime(), startOfTomorrow);
         return duration.toMillis();
     }

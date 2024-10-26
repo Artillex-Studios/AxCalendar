@@ -4,9 +4,10 @@ import com.artillexstudios.axcalendar.gui.impl.CalendarGui;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class SubCommandOpen {
+public enum SubCommandOpen {
+    INSTANCE;
 
-    public void subCommand(@NotNull Player player) {
+    public void execute(@NotNull Player player) {
         new CalendarGui(player).open();
     }
 }

@@ -1,5 +1,7 @@
 package com.artillexstudios.axcalendar.database;
 
+import com.artillexstudios.axcalendar.gui.data.Day;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,15 +14,13 @@ public interface Database {
 
     void setup();
 
-    void claim(@NotNull Player player, int day);
+    void claim(@NotNull Player player, Day day);
 
-    boolean isClaimed(@NotNull Player player, int day);
+    boolean isClaimed(@NotNull Player player, Day day);
 
-    ArrayList<Integer> claimedDays(@NotNull Player player);
+    int countIps(@NotNull Player player, Day day);
 
-    int countIps(@NotNull Player player, int day);
-
-    void reset(@NotNull UUID uuid);
+    void reset(@NotNull OfflinePlayer player);
 
     void disable();
 }
