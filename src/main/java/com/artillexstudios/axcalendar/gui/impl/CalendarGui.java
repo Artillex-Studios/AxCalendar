@@ -36,14 +36,17 @@ import static com.artillexstudios.axcalendar.AxCalendar.MESSAGEUTILS;
 public class CalendarGui extends GuiFrame {
     private static final Set<CalendarGui> openMenus = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap<>()));
 
-    private final Gui gui = Gui.gui()
-            .title(StringUtils.format(MENU.getString("title")))
-            .rows(MENU.getInt("rows", 6))
-            .disableAllInteractions()
-            .create();
+    private final Gui gui;
 
     public CalendarGui(Player player) {
         super(MENU, player);
+
+        this.gui = Gui.gui()
+                .title(StringUtils.format(AxCalendar.getPlaceholderParser().setPlaceholders(player, MENU.getString("title"))))
+                .rows(MENU.getInt("rows", 6))
+                .disableAllInteractions()
+                .create();
+
         setGui(gui);
     }
 
