@@ -50,6 +50,5 @@ public enum SubCommandReload {
 
         Bukkit.getConsoleSender().sendMessage(StringUtils.formatToString("&#FF0055╚ &#FF0055Successful reload!"));
         MESSAGEUTILS.sendLang(sender, "reload.success");
-        Commands.registerCommand();
     }
 }
