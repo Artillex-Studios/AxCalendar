@@ -1,6 +1,6 @@
 package com.artillexstudios.axcalendar.gui.data;
 
-import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.block.implementation.Section;
+import com.artillexstudios.axapi.libs.boostedyaml.block.implementation.Section;
 import com.artillexstudios.axapi.utils.ItemBuilder;
 import com.artillexstudios.axcalendar.gui.GuiFrame;
 import com.artillexstudios.axcalendar.gui.impl.CalendarGui;
