@@ -45,6 +45,7 @@ max-accounts-per-ip: 3
 timer-format: 1
 
 # auto update gui
+# increase this value if heads don't load in properly
 # in ticks
 # set to -1 to disable
 update-gui: 20
@@ -59,7 +60,7 @@ update-gui: 20
 claim-requirements: []
 
 # you must define at least 1
-# reloading will add new commands, however a restart is recommended when editing this
+# requires a restart to update
 command-aliases:
   - "axcalendar"
   - "calendar"

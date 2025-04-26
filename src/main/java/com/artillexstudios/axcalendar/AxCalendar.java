@@ -2,16 +2,17 @@ package com.artillexstudios.axcalendar;
 
 import com.artillexstudios.axapi.AxPlugin;
 import com.artillexstudios.axapi.config.Config;
-import com.artillexstudios.axapi.data.ThreadedQueue;
-import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.dvs.versioning.BasicVersioning;
-import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.dumper.DumperSettings;
-import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.general.GeneralSettings;
-import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.loader.LoaderSettings;
-import com.artillexstudios.axapi.libs.boostedyaml.boostedyaml.settings.updater.UpdaterSettings;
-import com.artillexstudios.axapi.libs.libby.BukkitLibraryManager;
-import com.artillexstudios.axapi.utils.FeatureFlags;
+import com.artillexstudios.axapi.dependencies.DependencyManagerWrapper;
+import com.artillexstudios.axapi.executor.ThreadedQueue;
+import com.artillexstudios.axapi.libs.boostedyaml.dvs.versioning.BasicVersioning;
+import com.artillexstudios.axapi.libs.boostedyaml.settings.dumper.DumperSettings;
+import com.artillexstudios.axapi.libs.boostedyaml.settings.general.GeneralSettings;
+import com.artillexstudios.axapi.libs.boostedyaml.settings.loader.LoaderSettings;
+import com.artillexstudios.axapi.libs.boostedyaml.settings.updater.UpdaterSettings;
+import com.artillexstudios.axapi.metrics.AxMetrics;
 import com.artillexstudios.axapi.utils.MessageUtils;
 import com.artillexstudios.axapi.utils.StringUtils;
+import com.artillexstudios.axapi.utils.featureflags.FeatureFlags;
 import com.artillexstudios.axcalendar.commands.Commands;
 import com.artillexstudios.axcalendar.database.Database;
 import com.artillexstudios.axcalendar.database.impl.H2;
@@ -28,6 +29,8 @@ import com.artillexstudios.axcalendar.utils.UpdateNotifier;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import revxrsal.zapper.DependencyManager;
+import revxrsal.zapper.relocation.Relocation;
 
 import java.io.File;
 
@@ -42,6 +45,7 @@ public final class AxCalendar extends AxPlugin {
     private static Database database;
     public static BukkitAudiences BUKKITAUDIENCES;
     private static Placeholders placeholderParser;
+    private static AxMetrics metrics;
 
     public static ThreadedQueue<Runnable> getThreadedQueue() {
         return threadedQueue;
@@ -59,23 +63,25 @@ public final class AxCalendar extends AxPlugin {
         return placeholderParser;
     }
 
-    public void load() {
-        BukkitLibraryManager libraryManager = new BukkitLibraryManager(this, "lib");
-        libraryManager.addMavenCentral();
-        libraryManager.addJitPack();
-        libraryManager.addRepository("https://repo.codemc.org/repository/maven-public/");
-        libraryManager.addRepository("https://repo.papermc.io/repository/maven-public/");
+    @Override
+    public void dependencies(DependencyManagerWrapper manager) {
+        instance = this;
+        manager.repository("https://jitpack.io/");
+        manager.repository("https://repo.codemc.org/repository/maven-public/");
+        manager.repository("https://repo.papermc.io/repository/maven-public/");
+        manager.repository("https://repo.artillex-studios.com/releases/");
 
+        DependencyManager dependencyManager = manager.wrapped();
         for (Libraries lib : Libraries.values()) {
-            libraryManager.loadLibrary(lib.getLibrary());
+            dependencyManager.dependency(lib.fetchLibrary());
+            for (Relocation relocation : lib.relocations()) {
+                dependencyManager.relocate(relocation);
+            }
         }
     }
 
     public void enable() {
-        instance = this;
-
-        int pluginId = 20392;
-        new Metrics(this, pluginId);
+        new Metrics(this, 20392);
 
         BUKKITAUDIENCES = BukkitAudiences.create(this);
 
@@ -110,17 +116,21 @@ public final class AxCalendar extends AxPlugin {
 
         GuiUpdater.start();
 
+        metrics = new AxMetrics(this, 21);
+        metrics.start();
+
         Bukkit.getConsoleSender().sendMessage(StringUtils.formatToString("&#FF0055[AxCalendar] Loaded plugin! Using &f" + database.getType() + " &#FF0055database to store data!"));
 
         if (CONFIG.getBoolean("update-notifier.enabled", true)) new UpdateNotifier(this, 5135);
     }
 
     public void disable() {
+        if (metrics != null) metrics.cancel();
         database.disable();
         GuiUpdater.stop();
     }
 
-    public void updateFlags() {
-        FeatureFlags.USE_LEGACY_HEX_FORMATTER.set(true);
+    public void updateFlags(FeatureFlags flags) {
+        flags.USE_LEGACY_HEX_FORMATTER.set(true);
     }
 }
