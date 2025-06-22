@@ -130,7 +130,7 @@ public final class AxCalendar extends AxPlugin {
         GuiUpdater.stop();
     }
 
-    public void updateFlags(FeatureFlags flags) {
-        flags.USE_LEGACY_HEX_FORMATTER.set(true);
+    public void updateFlags() {
+        FeatureFlags.USE_LEGACY_HEX_FORMATTER.set(true);
     }
 }
