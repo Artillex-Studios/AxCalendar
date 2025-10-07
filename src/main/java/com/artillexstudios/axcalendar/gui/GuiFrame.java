@@ -89,6 +89,7 @@ public class GuiFrame {
 
     protected void createItem(@NotNull String route, @Nullable GuiAction<InventoryClickEvent> action, Map<String, String> replacements) {
         if (file.getString(route + ".slot") == null && file.getStringList(route + ".slot").isEmpty()) return;
+        if (file.getString(route + ".material") == null && file.getString(route + ".type") == null) return;
         final List<String> slots = file.getBackingDocument().getStringList(route + ".slot");
         createItem(route, action, replacements, getSlots(slots.isEmpty() ? List.of(file.getString(route + ".slot")) : slots));
     }

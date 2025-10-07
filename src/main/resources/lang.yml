@@ -2,8 +2,11 @@
 
 help:
   - " "
-  - "&#FF0055&lAxCalendar &7» "
-  - " &7- &f/axcalendar reload &7| &#FF0055Reload plugin"
+  - "<gradient:#FF0055:#FF0000><b>AxCalendar</b></gradient> <#DD0044>Help"
+  - " <#DD0044>➤ <white>/axcalendar <#DDDDDD>| <#FFAAAA>Open calendar"
+  - " <#DD0044>➤ <white>/axcalendar reload <#DDDDDD>| <#FFAAAA>Reload plugin"
+  - " <#DD0044>➤ <white>/axcalendar reset <player> <#DDDDDD>| <#FFAAAA>Reset calendar rewards"
+  - " <#DD0044>➤ <white>/axcalendar debuginfo <#DDDDDD>| <#FFAAAA>Print out some useful information"
   - " "
 
 error:

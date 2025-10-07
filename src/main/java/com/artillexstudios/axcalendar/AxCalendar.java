@@ -43,7 +43,6 @@ public final class AxCalendar extends AxPlugin {
     private static AxPlugin instance;
     private static ThreadedQueue<Runnable> threadedQueue;
     private static Database database;
-    public static BukkitAudiences BUKKITAUDIENCES;
     private static Placeholders placeholderParser;
     private static AxMetrics metrics;
 
@@ -82,8 +81,6 @@ public final class AxCalendar extends AxPlugin {
 
     public void enable() {
         new Metrics(this, 20392);
-
-        BUKKITAUDIENCES = BukkitAudiences.create(this);
 
         CONFIG = new Config(new File(getDataFolder(), "config.yml"), getResource("config.yml"), GeneralSettings.builder().setUseDefaults(false).build(), LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setKeepAll(true).setVersioning(new BasicVersioning("version")).build());
         LANG = new Config(new File(getDataFolder(), "lang.yml"), getResource("lang.yml"), GeneralSettings.builder().setUseDefaults(false).build(), LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT, UpdaterSettings.builder().setKeepAll(true).setVersioning(new BasicVersioning("version")).build());

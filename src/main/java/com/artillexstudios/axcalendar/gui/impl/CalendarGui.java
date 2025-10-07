@@ -107,7 +107,7 @@ public class CalendarGui extends GuiFrame {
                                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), AxCalendar.getPlaceholderParser().setPlaceholders(player, command));
                                     }
                                     for (Map<?, ?> map : reward.claimItems()) {
-                                        ItemStack it = new ItemBuilder((Map<Object, Object>) map).get();
+                                        ItemStack it = ItemBuilder.create((Map<Object, Object>) map).get();
                                         ContainerUtils.INSTANCE.addOrDrop(player.getInventory(), List.of(it), player.getLocation());
                                     }
                                     MESSAGEUTILS.sendFormatted(player, CONFIG.getString("prefix") + reward.message(), rp);

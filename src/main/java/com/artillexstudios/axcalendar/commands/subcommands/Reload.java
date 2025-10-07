@@ -1,7 +1,6 @@
 package com.artillexstudios.axcalendar.commands.subcommands;
 
 import com.artillexstudios.axapi.utils.StringUtils;
-import com.artillexstudios.axcalendar.commands.Commands;
 import com.artillexstudios.axcalendar.gui.data.MenuManager;
 import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import org.bukkit.Bukkit;
@@ -16,7 +15,7 @@ import static com.artillexstudios.axcalendar.AxCalendar.MENU;
 import static com.artillexstudios.axcalendar.AxCalendar.MESSAGEUTILS;
 import static com.artillexstudios.axcalendar.AxCalendar.REWARDS;
 
-public enum SubCommandReload {
+public enum Reload {
     INSTANCE;
 
     public void execute(@NotNull CommandSender sender) {

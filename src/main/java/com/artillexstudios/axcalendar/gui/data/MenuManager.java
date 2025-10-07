@@ -38,10 +38,10 @@ public class MenuManager {
             int idx = 0;
             for (Integer i : dayNum) {
                 Day day = new Day(i,
-                        new ItemBuilder(claimable).get(),
-                        new ItemBuilder(claimed).get(),
-                        new ItemBuilder(unclaimable).get(),
-                        new ItemBuilder(expired).get(),
+                        ItemBuilder.create(claimable).get(),
+                        ItemBuilder.create(claimed).get(),
+                        ItemBuilder.create(unclaimable).get(),
+                        ItemBuilder.create(expired).get(),
                         slots.getInt(idx),
                         new ArrayList<>()
                 );

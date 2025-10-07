@@ -2,9 +2,9 @@ package com.artillexstudios.axcalendar.commands;
 
 import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axcalendar.AxCalendar;
-import com.artillexstudios.axcalendar.commands.subcommands.SubCommandOpen;
-import com.artillexstudios.axcalendar.commands.subcommands.SubCommandReload;
-import com.artillexstudios.axcalendar.commands.subcommands.SubCommandReset;
+import com.artillexstudios.axcalendar.commands.subcommands.Open;
+import com.artillexstudios.axcalendar.commands.subcommands.Reload;
+import com.artillexstudios.axcalendar.commands.subcommands.Reset;
 import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import com.artillexstudios.axcalendar.utils.CommandMessages;
 import org.bukkit.OfflinePlayer;
@@ -27,7 +27,7 @@ public class Commands implements OrphanCommand {
 
     @DefaultFor({"~", "~ open"})
     public void open(@NotNull Player sender) {
-        SubCommandOpen.INSTANCE.execute(sender);
+        Open.INSTANCE.execute(sender);
     }
 
     @Subcommand("help")
@@ -40,13 +40,13 @@ public class Commands implements OrphanCommand {
     @Subcommand("reload")
     @CommandPermission("axcalendar.admin")
     public void reload(@NotNull CommandSender sender) {
-        SubCommandReload.INSTANCE.execute(sender);
+        Reload.INSTANCE.execute(sender);
     }
 
     @Subcommand("reset")
     @CommandPermission("axcalendar.admin")
     public void reset(@NotNull CommandSender sender, OfflinePlayer player) {
-        SubCommandReset.INSTANCE.execute(sender, player);
+        Reset.INSTANCE.execute(sender, player);
     }
 
     @Subcommand("debuginfo")

@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static com.artillexstudios.axcalendar.AxCalendar.MESSAGEUTILS;
 
-public enum SubCommandReset {
+public enum Reset {
     INSTANCE;
 
     public void execute(@NotNull CommandSender sender, OfflinePlayer player) {

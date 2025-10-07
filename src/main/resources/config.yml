@@ -1,6 +1,6 @@
 # DOCUMENTATION: https://docs.artillex-studios.com/axcalendar.html
 
-prefix: "&#FF0055&lAxCalendar &7» "
+prefix: "<gradient:#FF0055:#FF0000><b>AxCalendar</b></gradient> &7» "
 
 database:
   # h2, mysql, postgresql

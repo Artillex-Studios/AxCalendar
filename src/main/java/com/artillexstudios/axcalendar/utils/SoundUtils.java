@@ -1,17 +1,12 @@
 package com.artillexstudios.axcalendar.utils;
 
 import com.artillexstudios.axapi.utils.StringUtils;
-import net.kyori.adventure.key.InvalidKeyException;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.sound.Sound;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Pattern;
-
-import static com.artillexstudios.axcalendar.AxCalendar.BUKKITAUDIENCES;
 
 public class SoundUtils {
     private static final Pattern SPLIT = Pattern.compile("\\|");
@@ -30,15 +25,8 @@ public class SoundUtils {
                 pitch = Float.parseFloat(split[2]);
             }
 
-            Key key = Key.key(split[0]);
-            Sound s = Sound.sound()
-                    .pitch(pitch)
-                    .volume(volume)
-                    .type(key)
-                    .build();
-
-            BUKKITAUDIENCES.player(player).playSound(s);
-        } catch (InvalidKeyException ex) {
+            player.playSound(player, split[0], volume, pitch);
+        } catch (Exception ex) {
             Bukkit.getConsoleSender().sendMessage(StringUtils.formatToString("&#FF0000[AxCalendar] The sound %sound% does not exist, this is a configuration issue!".replace("%sound%", sound)));
         }
     }
