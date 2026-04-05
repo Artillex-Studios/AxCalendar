@@ -26,7 +26,6 @@ import com.artillexstudios.axcalendar.hooks.Placeholders;
 import com.artillexstudios.axcalendar.libraries.Libraries;
 import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import com.artillexstudios.axcalendar.utils.UpdateNotifier;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import revxrsal.zapper.DependencyManager;
@@ -118,7 +117,8 @@ public final class AxCalendar extends AxPlugin {
 
         Bukkit.getConsoleSender().sendMessage(StringUtils.formatToString("&#FF0055[AxCalendar] Loaded plugin! Using &f" + database.getType() + " &#FF0055database to store data!"));
 
-        if (CONFIG.getBoolean("update-notifier.enabled", true)) new UpdateNotifier(this, 5135);
+        UpdateNotifier.init(CONFIG, LANG);
+        if (CONFIG.getBoolean("update-notifier.enabled", true)) new UpdateNotifier();
     }
 
     public void disable() {

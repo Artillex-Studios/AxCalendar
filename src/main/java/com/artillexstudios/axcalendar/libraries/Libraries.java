@@ -16,7 +16,7 @@ public enum Libraries {
 
     POSTGRESQL("org{}postgresql:postgresql:42.7.5", relocation("org{}postgresql", "com.artillexstudios.axcalendar.libs.postgresql")),
 
-    HIKARICP("com{}zaxxer:HikariCP:6.3.0", relocation("com{}zaxxer{}hikari", "com.artillexstudios.axcalendar.libs.hikari"));
+    HIKARICP("com{}zaxxer:HikariCP:7.0.2", relocation("com{}zaxxer{}hikari", "com.artillexstudios.axcalendar.libs.hikari"));
 
     private final List<Relocation> relocations = new ArrayList<>();
     private final Dependency library;
