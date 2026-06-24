@@ -44,7 +44,17 @@ public class CalendarUtils {
     public static long getMilisUntilDay(int day) {
         final String monthStr = CONFIG.getString("month", "DECEMBER");
         Month month = monthStr.equalsIgnoreCase("AUTO") ? getZonedDateTime().getMonth() : Month.valueOf(monthStr);
-        final ZonedDateTime startOfTomorrow = getZonedDateTime().withMonth(month.getValue()).withDayOfMonth(day).toLocalDate().atStartOfDay(zoneId);
+        final ZonedDateTime startOfTomorrow;
+
+        if (month.minLength() < day) {
+            day = day - month.minLength();
+            int monthValue = month.getValue() == 12 ? 1 : month.getValue() + 1;
+            startOfTomorrow = getZonedDateTime().withMonth(monthValue).withDayOfMonth(day).toLocalDate().atStartOfDay(zoneId);
+        }
+        else {
+            startOfTomorrow = getZonedDateTime().withMonth(month.getValue()).withDayOfMonth(day).toLocalDate().atStartOfDay(zoneId);
+        }
+
         final Duration duration = Duration.between(getZonedDateTime(), startOfTomorrow);
         return duration.toMillis();
     }
