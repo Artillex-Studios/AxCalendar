@@ -13,6 +13,7 @@ import com.artillexstudios.axapi.metrics.AxMetrics;
 import com.artillexstudios.axapi.utils.MessageUtils;
 import com.artillexstudios.axapi.utils.StringUtils;
 import com.artillexstudios.axapi.utils.featureflags.FeatureFlags;
+import com.artillexstudios.axapi.utils.logging.LoggerNameFormat;
 import com.artillexstudios.axcalendar.commands.Commands;
 import com.artillexstudios.axcalendar.database.Database;
 import com.artillexstudios.axcalendar.database.impl.H2;
@@ -28,8 +29,6 @@ import com.artillexstudios.axcalendar.utils.CalendarUtils;
 import com.artillexstudios.axcalendar.utils.UpdateNotifier;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import revxrsal.zapper.DependencyManager;
-import revxrsal.zapper.relocation.Relocation;
 
 import java.io.File;
 
@@ -64,20 +63,10 @@ public final class AxCalendar extends AxPlugin {
     @Override
     public void dependencies(DependencyManagerWrapper manager) {
         instance = this;
-        manager.repository("https://jitpack.io/");
-        manager.repository("https://repo.codemc.org/repository/maven-public/");
-        manager.repository("https://repo.papermc.io/repository/maven-public/");
-        manager.repository("https://repo.artillex-studios.com/releases/");
-
-        DependencyManager dependencyManager = manager.wrapped();
-        for (Libraries lib : Libraries.values()) {
-            dependencyManager.dependency(lib.fetchLibrary());
-            for (Relocation relocation : lib.relocations()) {
-                dependencyManager.relocate(relocation);
-            }
-        }
+        Libraries.load(instance, manager);
     }
 
+    @Override
     public void enable() {
         new Metrics(this, 20392);
 
@@ -121,13 +110,15 @@ public final class AxCalendar extends AxPlugin {
         if (CONFIG.getBoolean("update-notifier.enabled", true)) new UpdateNotifier();
     }
 
+    @Override
     public void disable() {
         if (metrics != null) metrics.cancel();
         database.disable();
         GuiUpdater.stop();
     }
 
+    @Override
     public void updateFlags() {
-        FeatureFlags.USE_LEGACY_HEX_FORMATTER.set(true);
+        FeatureFlags.LOGGER_NAME_FORMAT.set(LoggerNameFormat.NAMEABLE);
     }
 }
