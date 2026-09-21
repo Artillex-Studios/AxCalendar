@@ -72,10 +72,21 @@ public class GuiFrame {
     protected ItemStack buildItem(@NotNull String key, Map<String, String> replacements) {
         final Section section = file.getSection(key);
         final ItemStack item = ItemBuilderUtil.newBuilder(section, replacements).get();
-        if (section.getOptionalString("texture").isEmpty() && item.getItemMeta() instanceof SkullMeta skullMeta) {
+        ItemMeta meta = item.getItemMeta();
+
+        // Appliquer le custom model data si présent dans la config
+        if (section.getOptionalInt("custom-model-data").isPresent()) {
+            meta.setCustomModelData(section.getInt("custom-model-data"));
+        }
+
+        // Gérer le cas des têtes personnalisées sans texture définie explicitement
+        if (section.getOptionalString("texture").isEmpty() && meta instanceof SkullMeta skullMeta) {
             skullMeta.setOwningPlayer(player);
             item.setItemMeta(skullMeta);
+        } else {
+            item.setItemMeta(meta);
         }
+
         return item;
     }
 
