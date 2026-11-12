@@ -148,12 +148,17 @@ public class CalendarGui extends GuiFrame {
                 return;
             }
 
-            gui.setCloseGuiAction(e -> openMenus.remove(this));
+            gui.setCloseGuiAction(e -> {
+                openMenus.remove(this);
+            });
 
-            Scheduler.get().run(t -> {
+            Runnable runnable = () -> {
                 gui.open(player);
                 openMenus.add(this);
-            });
+            };
+            Scheduler.get().run(player, task -> {
+                runnable.run();
+            }, runnable);
         });
     }
 
